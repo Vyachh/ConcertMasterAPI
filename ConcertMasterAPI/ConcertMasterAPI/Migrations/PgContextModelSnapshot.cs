@@ -21,16 +21,14 @@ namespace ConcertMasterAPI.Migrations
 
             modelBuilder.Entity("ConcertMasterAPI.Models.AddressVenue", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+                        .HasColumnType("uuid");
 
                     b.Property<int>("Capacity")
                         .HasColumnType("integer");
 
                     b.Property<string>("City")
-                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("character varying(100)");
 
@@ -39,22 +37,18 @@ namespace ConcertMasterAPI.Migrations
                         .HasColumnType("character varying(100)");
 
                     b.Property<string>("Country")
-                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("character varying(100)");
 
                     b.Property<string>("PostalCode")
-                        .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("character varying(50)");
 
                     b.Property<string>("State")
-                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("character varying(100)");
 
                     b.Property<string>("StreetAddress")
-                        .IsRequired()
                         .HasMaxLength(200)
                         .HasColumnType("character varying(200)");
 
@@ -68,36 +62,31 @@ namespace ConcertMasterAPI.Migrations
                     b.ToTable("Venues");
                 });
 
-            modelBuilder.Entity("ConcertMasterAPI.Models.Artist", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
-
-                    b.Property<Guid?>("EventId")
-                        .HasColumnType("uuid");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("character varying(100)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("EventId");
-
-                    b.ToTable("Artists");
-                });
-
-            modelBuilder.Entity("ConcertMasterAPI.Models.Event", b =>
+            modelBuilder.Entity("ConcertMasterAPI.Models.EventCategory", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<int?>("AddressVenueId")
+                    b.Property<int>("Genre")
                         .HasColumnType("integer");
+
+                    b.Property<int>("Type")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("EventCategories");
+                });
+
+            modelBuilder.Entity("ConcertMasterAPI.Models.EventModels.Event", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid?>("AddressVenueId")
+                        .HasColumnType("uuid");
 
                     b.Property<Guid?>("CategoryId")
                         .HasColumnType("uuid");
@@ -126,23 +115,6 @@ namespace ConcertMasterAPI.Migrations
                     b.ToTable("Events");
                 });
 
-            modelBuilder.Entity("ConcertMasterAPI.Models.EventCategory", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
-
-                    b.Property<int>("Genre")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("Type")
-                        .HasColumnType("integer");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("EventCategories");
-                });
-
             modelBuilder.Entity("ConcertMasterAPI.Models.Order", b =>
                 {
                     b.Property<Guid>("Id")
@@ -168,8 +140,8 @@ namespace ConcertMasterAPI.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<int?>("ArtistId")
-                        .HasColumnType("integer");
+                    b.Property<Guid>("ArtistId")
+                        .HasColumnType("uuid");
 
                     b.Property<string>("Platform")
                         .IsRequired()
@@ -181,23 +153,26 @@ namespace ConcertMasterAPI.Migrations
                         .HasMaxLength(200)
                         .HasColumnType("character varying(200)");
 
+                    b.Property<Guid?>("UserId")
+                        .HasColumnType("uuid");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("ArtistId");
+                    b.HasIndex("UserId");
 
                     b.ToTable("SocialMediaLink");
                 });
 
-            modelBuilder.Entity("ConcertMasterAPI.Models.Ticket", b =>
+            modelBuilder.Entity("ConcertMasterAPI.Models.TicketModels.Ticket", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<Guid?>("BuyerId")
-                        .HasColumnType("uuid");
+                    b.Property<int>("Count")
+                        .HasColumnType("integer");
 
-                    b.Property<Guid?>("EventId")
+                    b.Property<Guid>("EventId")
                         .HasColumnType("uuid");
 
                     b.Property<Guid?>("OrderId")
@@ -214,13 +189,34 @@ namespace ConcertMasterAPI.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("BuyerId");
-
                     b.HasIndex("EventId");
 
                     b.HasIndex("OrderId");
 
                     b.ToTable("Tickets");
+                });
+
+            modelBuilder.Entity("ConcertMasterAPI.Models.TicketModels.UserTicket", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<int>("Count")
+                        .HasColumnType("integer");
+
+                    b.Property<DateTime>("PurchaseDate")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<Guid>("TicketId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("UserTickets");
                 });
 
             modelBuilder.Entity("ConcertMasterAPI.Models.User", b =>
@@ -235,7 +231,13 @@ namespace ConcertMasterAPI.Migrations
                     b.Property<Guid?>("EventId")
                         .HasColumnType("uuid");
 
+                    b.Property<Guid?>("EventId1")
+                        .HasColumnType("uuid");
+
                     b.Property<string>("Login")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Name")
                         .HasColumnType("text");
 
                     b.Property<string>("PasswordHash")
@@ -251,17 +253,12 @@ namespace ConcertMasterAPI.Migrations
 
                     b.HasIndex("EventId");
 
+                    b.HasIndex("EventId1");
+
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("ConcertMasterAPI.Models.Artist", b =>
-                {
-                    b.HasOne("ConcertMasterAPI.Models.Event", null)
-                        .WithMany("Artists")
-                        .HasForeignKey("EventId");
-                });
-
-            modelBuilder.Entity("ConcertMasterAPI.Models.Event", b =>
+            modelBuilder.Entity("ConcertMasterAPI.Models.EventModels.Event", b =>
                 {
                     b.HasOne("ConcertMasterAPI.Models.AddressVenue", "AddressVenue")
                         .WithMany("Events")
@@ -287,35 +284,33 @@ namespace ConcertMasterAPI.Migrations
 
             modelBuilder.Entity("ConcertMasterAPI.Models.SocialMediaLink", b =>
                 {
-                    b.HasOne("ConcertMasterAPI.Models.Artist", "Artist")
+                    b.HasOne("ConcertMasterAPI.Models.User", null)
                         .WithMany("SocialMediaLinks")
-                        .HasForeignKey("ArtistId");
-
-                    b.Navigation("Artist");
+                        .HasForeignKey("UserId");
                 });
 
-            modelBuilder.Entity("ConcertMasterAPI.Models.Ticket", b =>
+            modelBuilder.Entity("ConcertMasterAPI.Models.TicketModels.Ticket", b =>
                 {
-                    b.HasOne("ConcertMasterAPI.Models.User", "Buyer")
-                        .WithMany()
-                        .HasForeignKey("BuyerId");
-
-                    b.HasOne("ConcertMasterAPI.Models.Event", null)
+                    b.HasOne("ConcertMasterAPI.Models.EventModels.Event", null)
                         .WithMany("Tickets")
-                        .HasForeignKey("EventId");
+                        .HasForeignKey("EventId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("ConcertMasterAPI.Models.Order", null)
                         .WithMany("Tickets")
                         .HasForeignKey("OrderId");
-
-                    b.Navigation("Buyer");
                 });
 
             modelBuilder.Entity("ConcertMasterAPI.Models.User", b =>
                 {
-                    b.HasOne("ConcertMasterAPI.Models.Event", null)
-                        .WithMany("Organizers")
+                    b.HasOne("ConcertMasterAPI.Models.EventModels.Event", null)
+                        .WithMany("Artists")
                         .HasForeignKey("EventId");
+
+                    b.HasOne("ConcertMasterAPI.Models.EventModels.Event", null)
+                        .WithMany("Organizers")
+                        .HasForeignKey("EventId1");
                 });
 
             modelBuilder.Entity("ConcertMasterAPI.Models.AddressVenue", b =>
@@ -323,12 +318,7 @@ namespace ConcertMasterAPI.Migrations
                     b.Navigation("Events");
                 });
 
-            modelBuilder.Entity("ConcertMasterAPI.Models.Artist", b =>
-                {
-                    b.Navigation("SocialMediaLinks");
-                });
-
-            modelBuilder.Entity("ConcertMasterAPI.Models.Event", b =>
+            modelBuilder.Entity("ConcertMasterAPI.Models.EventModels.Event", b =>
                 {
                     b.Navigation("Artists");
 
@@ -340,6 +330,11 @@ namespace ConcertMasterAPI.Migrations
             modelBuilder.Entity("ConcertMasterAPI.Models.Order", b =>
                 {
                     b.Navigation("Tickets");
+                });
+
+            modelBuilder.Entity("ConcertMasterAPI.Models.User", b =>
+                {
+                    b.Navigation("SocialMediaLinks");
                 });
 #pragma warning restore 612, 618
         }

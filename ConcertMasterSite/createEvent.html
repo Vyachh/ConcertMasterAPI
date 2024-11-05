@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Добавить мероприятие</title>
+    <link rel="stylesheet" href="./css/output.css" />
+    <script defer type="module" src="./js/bootstrap.min.js" ></script>
+    <script defer type="module" src="./js/event.js" ></script>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">Concert Master</a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNav"
+            aria-controls="navbarNav"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+              <li class="nav-item">
+                <a class="nav-link" href="/index.html">Главная</a>
+              </li>
+              <li class="nav-item d-flex">
+                <a class="nav-link me-2" href="register.html">Регистрация</a>
+                <a class="nav-link" href="login.html">Авторизация</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="createEvent.html">Добавить мероприятие</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="createTickets.html">Добавить билеты</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    <div class="container mt-5">
+        <h1 class="text-center">Добавить новое мероприятие</h1>
+        <div class="" id="message"></div>
+        <form id="eventForm">
+            <div class="mb-3">
+                <label for="title" class="form-label">Название мероприятия</label>
+                <input type="text" class="form-control" id="title" required>
+            </div>
+            <div class="mb-3">
+                <label for="description" class="form-label">Описание</label>
+                <textarea class="form-control" id="description" rows="3" required></textarea>
+            </div>
+            <div class="flex">
+                <div class="mb-3">
+                    <label for="category" class="form-label">Тип мероприятия</label>
+                    <select class="form-select" id="eventType" required>
+                        <option value="" disabled selected>Выберите тип</option>
+                    </select>
+                </div>
+                <div class="mx-3">
+                    <label for="category" class="form-label">Жанр мероприятия</label>
+                    <select class="form-select" id="eventGenre" required>
+                        <option value="" disabled selected>Выберите жанр</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="eventStart" class="form-label">Дата начала мероприятия</label>
+                    <input type="datetime-local" class="form-control" id="eventStart" required>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label for="address" class="form-label">Адрес мероприятия</label>
+                <input type="text" class="form-control" id="address" required>
+            </div>
+            <div class="flex">
+                <div class="mb-3 ">
+                    <label for="organizers" class="form-label">Организаторы</label>
+                    <ul class="form-select" id="organizers">
+                    </ul>
+                </div>
+                <div class="mx-3">
+                    <label for="artists" class="form-label">Артисты</label>
+                    <ul class="form-select" id="artists">
+                    </ul>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Добавить мероприятие</button>
+        </form>
+        <div id="message" class="mt-3"></div>
+    </div>
+</body>
+</html>

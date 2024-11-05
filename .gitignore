@@ -4,3 +4,7 @@ ConcertMasterAPI/ConcertMasterAPI/appsettings.Development.json
 ConcertMasterAPI/ConcertMasterAPI/appsettings.json
 ConcertMasterAPI/ConcertMasterAPI/obj
 ConcertMasterAPI/ConcertMasterAPI/bin
+/ConcertMasterAPI/ConcertMasterAPI/Migrations
+ConcertMasterSite/js/bootstrap.min.js
+/ConcertMasterSite/assets
+/ConcertMasterAPI/ConcertMasterAPI/Migrations

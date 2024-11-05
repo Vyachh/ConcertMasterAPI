@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./css/output.css" />
+    <link rel="stylesheet" href="./css/createTickets.css" />
+    <script defer type="module" src="./js/bootstrap.min.js"></script>
+    <script defer type="module" src="./js/tickets.js"></script>
+    <title>Document</title>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="/index.html">Concert Master</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="/index.html">Главная</a>
+            </li>
+            <li class="nav-item d-flex">
+              <a class="nav-link me-2" href="register.html">Регистрация</a>
+              <a class="nav-link" href="login.html">Авторизация</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="createEvent.html"
+                >Добавить мероприятие</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="createTickets.html">Добавить билеты</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <h1 class="text-center">Добавить билеты</h1>
+    <div class="" id="message"></div>
+    <div class="container mt-5 flex justify-between">
+      <form id="eventForm">
+        <div class="mb-3">
+          <label for="category" class="form-label">Мероприятие</label>
+          <select class="form-select" id="eventTitles" required>
+            <option value="" disabled selected>Выберите мероприятие</option>
+          </select>
+        </div>
+        <div class="flex" id="input-group">
+          <div class="mb-3">
+            <label for="category" class="form-label">VIP билеты</label>
+            <div class="input-group">
+              <input
+                required=""
+                type="number"
+                name="vipNumber"
+                autocomplete="off"
+                class="input"
+              />
+              <label class="user-label">Введите кол-во</label>
+            </div>
+            <label for="category" class="form-label">Стоимость, руб.</label>
+            <div class="input-group">
+              <input
+                required=""
+                type="number"
+                name="vipPrice"
+                autocomplete="off"
+                class="input"
+              />
+              <label class="user-label">Введите кол-во</label>
+            </div>
+          </div>
+          <div class="mx-3">
+            <label for="category" class="form-label">Стандартные билеты</label>
+            <div class="input-group">
+              <input
+                required=""
+                type="number"
+                name="standardNumber"
+                autocomplete="off"
+                class="input"
+              />
+              <label class="user-label">Введите кол-во</label>
+            </div>
+            <label for="category" class="form-label">Стоимость, руб.</label>
+            <div class="input-group">
+              <input
+                required=""
+                type="number"
+                name="standardPrice"
+                autocomplete="off"
+                class="input"
+              />
+              <label class="user-label">Введите кол-во</label>
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="category" class="form-label">Студенческие билеты</label>
+            <div class="input-group">
+              <input
+                required=""
+                type="number"
+                name="studentNumber"
+                autocomplete="off"
+                class="input"
+              />
+              <label class="user-label">Введите кол-во</label>
+            </div>
+            <label for="category" class="form-label">Стоимость, руб.</label>
+            <div class="input-group">
+              <input
+                required=""
+                type="number"
+                name="studentPrice"
+                autocomplete="off"
+                class="input"
+              />
+              <label class="user-label">Введите кол-во</label>
+            </div>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary">
+          Добавить мероприятие
+        </button>
+      </form>
+
+      <div class="d-none" id="eventInfo">
+        <h3>Информация о мероприятии</h3>
+        <div class="">
+          <div class="flex">
+            <h4 class="mx-2">Название мероприятия:</h4>
+            <p id="title"></p>
+          </div>
+          <div class="flex">
+            <h4 class="mx-2">Описание:</h4>
+            <p id="description"></p>
+          </div>
+          <div class="flex">
+            <h4 class="mx-2">Тип:</h4>
+            <p id="eventType"></p>
+          </div>
+          <div class="flex">
+            <h4 class="mx-2">Жанр:</h4>
+            <p id="eventGenre"></p>
+          </div>
+          <div class="flex">
+            <h4 class="mx-2">Дата начала:</h4>
+            <p id="eventStart"></p>
+          </div>
+          <div class="flex">
+            <h4 class="mx-2">Организаторы:</h4>
+            <p id="organizers"></p>
+          </div>
+          <div class="flex">
+            <h4 class="mx-2">Артисты:</h4>
+            <p id="artists"></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
