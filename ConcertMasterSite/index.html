@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./css/output.css" />
+    <script defer type="module" src="./js/main.js"></script>
+    <script defer type="module" src="./js/bootstrap.min.js"></script>
+    <title>Concert Master</title>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">Concert Master</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="/index.html">Главная</a>
+            </li>
+            <li class="nav-item d-flex">
+              <a class="nav-link me-2" href="register.html">Регистрация</a>
+              <a class="nav-link" href="login.html">Авторизация</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="createEvent.html"
+                >Добавить мероприятие</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="createTickets.html">Добавить билеты</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Главный блок с приветствием -->
+    <header class="bg-primary text-white text-center py-5">
+      <div class="container">
+        <h1>Добро пожаловать в Concert Master</h1>
+        <p class="lead">Мы организуем лучшие музыкальные мероприятия</p>
+        <a href="#" class="btn btn-light btn-lg">Узнать больше</a>
+      </div>
+    </header>
+    <!-- Блок с контактами -->
+    <section class="bg-light py-5">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-6">
+            <h2>Ближайшие концерты</h2>
+            <p>Здесь представлены все концерты, работающие через этот сайт</p>
+            <div class="flex">
+              <div id="ticketInfo">
+                <h4>Билеты</h4>
+                <ul id="ticketList"></ul>
+              </div>
+            </div>
+            <div class="" id="message"></div>
+          </div>
+          <div class="col-lg-6">
+            <div
+              class="list-group"
+              style="max-height: 300px; overflow-y: auto"
+              id="eventInfo"
+            ></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="bg-dark text-white text-center py-3">
+      <p>&copy; 2024 Concert Master. Все права защищены.</p>
+    </footer>
+  </body>
+</html>

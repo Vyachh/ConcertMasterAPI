@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./css/output.css" />
+    <script defer type="module" src="./js/bootstrap.min.js" ></script>
+    <script defer src="./js/authorize.js" type="module"></script>
+    <title>Авторизация</title>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">Concert Master</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="/index.html">Главная</a>
+            </li>
+            <li class="nav-item d-flex">
+              <a class="nav-link me-2" href="register.html">Регистрация</a>
+              <a class="nav-link" href="login.html">Авторизация</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="createEvent.html">Добавить мероприятие</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="createTickets.html">Добавить билеты</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container">
+      <!-- Авторизация -->
+      <div class="row justify-content-center">
+        <div class="col-lg-4">
+          <h2 class="text-center mt-5">Авторизация</h2>
+          <div id="error-message" class="alert alert-danger" role="alert" style="display: none;"></div>
+          <form id="loginForm" class="mt-3">
+            <div class="mb-3">
+              <label for="username" class="form-label">Логин</label>
+              <input type="text" class="form-control" id="username" required />
+            </div>
+            <div class="mb-3">
+              <label for="password" class="form-label">Пароль</label>
+              <input
+                type="password"
+                class="form-control"
+                id="password"
+                required
+              />
+            </div>
+            <button type="submit" class="btn btn-primary w-100">Войти</button>
+          </form>
+          <div id="message" class="mt-3"></div>
+        </div>
+      </div>
+
+      <!-- Регистрация -->
+      <div class="row justify-content-center">
+        <div class="col-lg-4">
+          <h2 class="text-center mt-5">Регистрация</h2>
+          <form id="registerForm" class="mt-3">
+            <div class="mb-3">
+              <label for="username" class="form-label">Логин</label>
+              <input type="text" class="form-control" id="regUsername" required />
+            </div>
+            <div class="mb-3">
+              <label for="password" class="form-label">Пароль</label>
+              <input
+                type="password"
+                class="form-control"
+                id="regPassword"
+                required
+              />
+            </div>
+            <button type="submit" class="btn btn-primary w-100">Войти</button>
+          </form>
+          <div id="message" class="mt-3"></div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,44 +1,72 @@
-﻿using System.Collections.Generic;
+﻿using ConcertMasterAPI.Models.EventModels;
+using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace ConcertMasterAPI.Models
 {
+    /// <summary>
+    /// Адрес проведения
+    /// </summary>
     public class AddressVenue
     {
-
+        /// <summary>
+        /// Идентификатор адреса
+        /// </summary>
         [Key]
-        public int Id { get; set; }
+        public Guid Id { get; set; }
 
+        /// <summary>
+        /// Название адреса
+        /// </summary>
         [Required]
         [MaxLength(100)]
         public string VenueName { get; set; }
 
-        [Required]
+        /// <summary>
+        /// Улица адреса
+        /// </summary>
         [MaxLength(200)]
-        public string StreetAddress { get; set; } 
+        public string StreetAddress { get; set; }
 
-        [Required]
+        /// <summary>
+        /// Город
+        /// </summary>
         [MaxLength(100)]
         public string City { get; set; }
 
-        [Required]
+        /// <summary>
+        /// Штат
+        /// </summary>
         [MaxLength(100)]
-        public string State { get; set; } 
+        public string State { get; set; }
 
-        [Required]
+        /// <summary>
+        /// Код
+        /// </summary>
         [MaxLength(50)]
         public string PostalCode { get; set; }
 
-        [Required]
+        /// <summary>
+        /// Страна
+        /// </summary>
         [MaxLength(100)]
-        public string Country { get; set; } 
+        public string Country { get; set; }
 
+        /// <summary>
+        /// Координаты
+        /// </summary>
         [MaxLength(100)]
         public string Coordinates { get; set; }
 
-        public int Capacity { get; set; } 
+        /// <summary>
+        /// Численность
+        /// </summary>
+        public int Capacity { get; set; }
 
+        /// <summary>
+        /// Мероприятия
+        /// </summary>
         public ICollection<Event> Events { get; set; }
     }
-
 }
