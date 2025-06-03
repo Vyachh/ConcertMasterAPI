@@ -98,5 +98,6 @@ namespace ConcertMasterAPI.Models.EventModels
         /// </summary>
         [JsonPropertyName("artists")]
         public IEnumerable<Guid> Artists { get; set; }
+
     }
 }

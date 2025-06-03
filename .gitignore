@@ -8,3 +8,5 @@ ConcertMasterAPI/ConcertMasterAPI/bin
 ConcertMasterSite/js/bootstrap.min.js
 /ConcertMasterSite/assets
 /ConcertMasterAPI/ConcertMasterAPI/Migrations
+/ConcertMasterAPI/Tests/bin/Debug/net8.0
+/ConcertMasterAPI/Tests/obj

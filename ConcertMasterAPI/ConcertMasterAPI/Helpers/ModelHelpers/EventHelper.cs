@@ -19,8 +19,10 @@ namespace ConcertMasterAPI.Helpers.Models
         /// </summary>
         /// <param name="eventDto">Данные события для преобразования.</param>
         /// <returns>Новый объект <see cref="Event"/>.</returns>
-        public static Event MapEvent(EventInformationDto eventDto, PgContext context)
+        public static Event MapEvent(EventInformationDto eventDto, IPgContext context)
         {
+            ValidateEventInformation(eventDto);
+
             var users = context.Users
                 .Where(u => eventDto.Organizers.Contains(u.Id) || eventDto.Artists.Contains(u.Id))
                 .ToList();
@@ -45,6 +47,32 @@ namespace ConcertMasterAPI.Helpers.Models
                 Organizers = users.Where(u => eventDto.Organizers.Contains(u.Id)).ToList(),
                 Artists = users.Where(u => eventDto.Artists.Contains(u.Id)).ToList()
             };
+        }
+
+        /// <summary>
+        /// Проверяет обязательные поля объекта <see cref="EventInformationDto"/>.
+        /// </summary>
+        /// <param name="eventDto">Данные события для проверки.</param>
+        /// <exception cref="ArgumentException">Выбрасывается, если обязательные поля не заполнены.</exception>
+        private static void ValidateEventInformation(EventInformationDto eventDto)
+        {
+            if (string.IsNullOrWhiteSpace(eventDto.Title))
+                throw new ArgumentException("Поле Title обязательно для заполнения.", nameof(eventDto.Title));
+
+            if (string.IsNullOrWhiteSpace(eventDto.Description))
+                throw new ArgumentException("Поле Description обязательно для заполнения.", nameof(eventDto.Description));
+
+            if (string.IsNullOrWhiteSpace(eventDto.EventGenre))
+                throw new ArgumentException("Поле EventGenre обязательно для заполнения.", nameof(eventDto.EventGenre));
+
+            if (string.IsNullOrWhiteSpace(eventDto.EventType))
+                throw new ArgumentException("Поле EventType обязательно для заполнения.", nameof(eventDto.EventType));
+
+            if (eventDto.EventStart == default)
+                throw new ArgumentException("Поле EventStart обязательно для заполнения.", nameof(eventDto.EventStart));
+
+            if (string.IsNullOrWhiteSpace(eventDto.VenueName))
+                throw new ArgumentException("Поле VenueName обязательно для заполнения.", nameof(eventDto.VenueName));
         }
     }
 }

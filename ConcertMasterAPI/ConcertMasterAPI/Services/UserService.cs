@@ -16,7 +16,7 @@ namespace ConcertMasterAPI.Services
         /// <summary>
         /// Контекст базы данных для взаимодействия с таблицами пользователей.
         /// </summary>
-        private readonly PgContext context;
+        private readonly IPgContext context;
 
         /// <summary>
         /// Интерфейс конфигурации для доступа к настройкам приложения.
@@ -28,7 +28,7 @@ namespace ConcertMasterAPI.Services
         /// </summary>
         /// <param name="context">Контекст базы данных.</param>
         /// <param name="configuration">Конфигурация приложения.</param>
-        public UserService(PgContext context, IConfiguration configuration)
+        public UserService(IPgContext context, IConfiguration configuration)
         {
             this.context = context;
             this.configuration = configuration;

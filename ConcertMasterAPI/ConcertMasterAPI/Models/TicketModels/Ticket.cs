@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ConcertMasterAPI.Attributes;
+using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace ConcertMasterAPI.Models.TicketModels
@@ -16,26 +17,31 @@ namespace ConcertMasterAPI.Models.TicketModels
         /// <summary>
         /// Тип билета (например, VIP, стандартный).
         /// </summary>
+        [Required]
         public TicketType Type { get; set; }
 
         /// <summary>
         /// Статус билета (например, в наличии или продан).
         /// </summary>
+        [Required]
         public TicketStatus Status { get; set; }
 
         /// <summary>
         /// Цена билета.
         /// </summary>
+        [Required]
         public int Price { get; set; }
 
         /// <summary>
         /// Количество доступных билетов.
         /// </summary>
+        [Required]
         public int Count { get; set; }
 
         /// <summary>
         /// Идентификатор события, к которому относится билет.
         /// </summary>
+        [RequiredGuid]
         public Guid EventId { get; set; }
     }
 

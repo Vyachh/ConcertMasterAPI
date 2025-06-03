@@ -19,17 +19,17 @@ namespace ConcertMasterAPI.Services
     public class EventService
     {
         /// <summary>
-        /// Контекст базы данных.е
+        /// Контекст базы данных.
         /// </summary>
-        private readonly PgContext context;
+        public readonly IPgContext Context;
 
         /// <summary>
         /// Инициализирует новый экземпляр <see cref="EventService"/> с контекстом базы данных.
         /// </summary>
         /// <param name="context">Контекст базы данных.</param>
-        public EventService(PgContext context)
+        public EventService(IPgContext context)
         {
-            this.context = context;
+            Context = context;
         }
 
         /// <summary>
@@ -42,11 +42,11 @@ namespace ConcertMasterAPI.Services
             {
                 EventGenres = Enum.GetNames(typeof(EventGenre)),
                 EventTypes = Enum.GetNames(typeof(EventType)),
-                Organizers = context.Users
+                Organizers = Context.Users
                     .Where(u => u.Type == UserType.Organizer)
                     .Select(u => new EventUserVM { UserId = u.Id, UserName = u.Name })
                     .ToList(),
-                Artists = context.Users
+                Artists = Context.Users
                     .Where(u => u.Type == UserType.Artist)
                     .Select(u => new EventUserVM { UserId = u.Id, UserName = u.Name })
                     .ToList()
@@ -59,7 +59,7 @@ namespace ConcertMasterAPI.Services
         /// <returns>Список объектов <see cref="EventDto"/> с подробными данными о событиях.</returns>
         public List<EventDto> GetEvents()
         {
-            var events = context.Events
+            var events = Context.Events
            .Include(e => e.Category)
            .Include(e => e.Artists)
            .Include(e => e.Organizers)
@@ -87,14 +87,14 @@ namespace ConcertMasterAPI.Services
         /// <returns>Результат добавления события в базу данных.</returns>
         public IActionResult AddEvent(EventInformationDto eventDto)
         {
-            if (context.Events.Any(e => e.Title == eventDto.Title))
+            if (eventDto == null || Context.Events.Any(e => e.Title == eventDto.Title))
             {
                 return new BadRequestObjectResult(new { message = Constants.ObjectExists });
             }
 
-            var newEvent = EventHelper.MapEvent(eventDto, context);
-            context.Events.Add(newEvent);
-            context.SaveChanges();
+            var newEvent = EventHelper.MapEvent(eventDto, Context);
+            Context.Events.Add(newEvent);
+            Context.SaveChanges();
 
             return new OkObjectResult(eventDto);
         }

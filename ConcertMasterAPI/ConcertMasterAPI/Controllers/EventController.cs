@@ -1,8 +1,7 @@
-﻿// Ignore Spelling: Dto
-
-using ConcertMasterAPI.Models.EventModels;
+﻿using ConcertMasterAPI.Models.EventModels;
 using ConcertMasterAPI.Services;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 
 namespace ConcertMasterAPI.Controllers
@@ -38,11 +37,22 @@ namespace ConcertMasterAPI.Controllers
             return eventService.GetEventInformation();
         }
 
-        /// <summary>
-        /// Возвращает полный список событий с информацией о категориях, организаторах, артистах и билетах.
-        /// </summary>
-        /// <returns>Список событий с подробной информацией.</returns>
-        [HttpGet("GetEvents")]
+		[HttpGet("Test")]
+		public EventInformation Test()
+		{
+            string[] str = null;
+            foreach (var i in str)
+            {
+                throw new Exception();
+            }
+			return eventService.GetEventInformation();
+		}
+
+		/// <summary>
+		/// Возвращает полный список событий с информацией о категориях, организаторах, артистах и билетах.
+		/// </summary>
+		/// <returns>Список событий с подробной информацией.</returns>
+		[HttpGet("GetEvents")]
         public List<EventDto> GetEvents()
         {
             return eventService.GetEvents();
