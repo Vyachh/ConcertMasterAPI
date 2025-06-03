@@ -12,7 +12,7 @@ namespace ConcertMasterAPI.Context
     /// <summary>
     /// Контекст базы данных.
     /// </summary>
-    public class PgContext : DbContext
+    public class PgContext : DbContext, IPgContext
     {
         /// <summary>
         /// Инициализирует новый экземпляр контекста базы данных с заданными параметрами.
@@ -28,7 +28,7 @@ namespace ConcertMasterAPI.Context
         public DbSet<AddressVenue> Venues { get; set; }
 
         /// <summary>Таблица событий.</summary>
-        public DbSet<Event> Events { get; set; }
+        public virtual DbSet<Event> Events { get; set; }
 
         /// <summary>Таблица категорий событий.</summary>
         public DbSet<EventCategory> EventCategories { get; set; }

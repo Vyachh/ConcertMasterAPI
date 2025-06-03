@@ -5,6 +5,7 @@ using ConcertMasterAPI.Models.TicketModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace ConcertMasterAPI.Services
@@ -17,13 +18,13 @@ namespace ConcertMasterAPI.Services
         /// <summary>
         /// Контекст базы данных.
         /// </summary>
-        private readonly PgContext context;
+        private readonly IPgContext context;
 
         /// <summary>
         /// Инициализирует новый экземпляр <see cref="TicketService"/> с контекстом базы данных.
         /// </summary>
         /// <param name="context">Контекст базы данных.</param>
-        public TicketService(PgContext context)
+        public TicketService(IPgContext context)
         {
             this.context = context;
         }
@@ -61,7 +62,9 @@ namespace ConcertMasterAPI.Services
 
             var success = context.SaveChanges() > 0;
 
-            return success ? new OkObjectResult(success) : new StatusCodeResult(StatusCodes.Status500InternalServerError);
+            return success 
+                ? new OkObjectResult(success) 
+                : new StatusCodeResult(StatusCodes.Status500InternalServerError);
         }
 
         /// <summary>
@@ -80,6 +83,7 @@ namespace ConcertMasterAPI.Services
             var existingTickets = context.Tickets
                 .Where(t => t.EventId == tickets[0].EventId)
                 .ToList();
+            var processedTickets = new List<Ticket>();
 
             foreach (var ticket in tickets)
             {
@@ -89,11 +93,18 @@ namespace ConcertMasterAPI.Services
                 {
                     existingTicket.Count += ticket.Count;
                     existingTicket.Price = ticket.Price;
+					context.Tickets.Update(existingTicket);
+					processedTickets.Add(existingTicket);
                 }
                 else
                 {
-                    context.Tickets.Add(ticket);
+                    processedTickets.Add(ticket);
                 }
+            }
+
+            if (processedTickets.Any())
+            {
+                context.Tickets.AddRange(processedTickets);
             }
 
             var success = context.SaveChanges() > 0;

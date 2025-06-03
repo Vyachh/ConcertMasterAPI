@@ -62,23 +62,6 @@ namespace ConcertMasterAPI.Migrations
                     b.ToTable("Venues");
                 });
 
-            modelBuilder.Entity("ConcertMasterAPI.Models.EventCategory", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
-
-                    b.Property<int>("Genre")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("Type")
-                        .HasColumnType("integer");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("EventCategories");
-                });
-
             modelBuilder.Entity("ConcertMasterAPI.Models.EventModels.Event", b =>
                 {
                     b.Property<Guid>("Id")
@@ -113,6 +96,23 @@ namespace ConcertMasterAPI.Migrations
                     b.HasIndex("CategoryId");
 
                     b.ToTable("Events");
+                });
+
+            modelBuilder.Entity("ConcertMasterAPI.Models.EventModels.EventCategory", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<int>("Genre")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("Type")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("EventCategories");
                 });
 
             modelBuilder.Entity("ConcertMasterAPI.Models.Order", b =>
@@ -264,7 +264,7 @@ namespace ConcertMasterAPI.Migrations
                         .WithMany("Events")
                         .HasForeignKey("AddressVenueId");
 
-                    b.HasOne("ConcertMasterAPI.Models.EventCategory", "Category")
+                    b.HasOne("ConcertMasterAPI.Models.EventModels.EventCategory", "Category")
                         .WithMany()
                         .HasForeignKey("CategoryId");
 

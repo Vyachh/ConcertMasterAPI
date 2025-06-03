@@ -44,10 +44,10 @@ namespace ConcertMasterAPI.Helpers.Models
             {
                 Subject = new ClaimsIdentity(new Claim[]
                 {
-                    new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
-                    new Claim(ClaimTypes.Name, user.Login),
-                    new Claim(ClaimTypes.Email, user.Email ?? string.Empty),
-                    new Claim(ClaimTypes.Role, user.Type.ToString()),
+                    new(ClaimTypes.NameIdentifier, user.Id.ToString()),
+                    new(ClaimTypes.Name, user.Login),
+                    new(ClaimTypes.Email, user.Email ?? string.Empty),
+                    new(ClaimTypes.Role, user.Type.ToString()),
                 }),
                 Expires = DateTime.UtcNow.AddDays(1),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
